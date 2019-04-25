@@ -18,6 +18,9 @@ public class ProductoService {
     }
     
     public ProductoEntity nuevo(ProductoEntity producto) {
+        if(producto.getName().isEmpty()==false){
+            producto.setName(producto.getName().substring(0,1).toUpperCase()+producto.getName().substring(1).toLowerCase());
+        }
         return this.productoRepository.save(producto);
     }
     
@@ -30,12 +33,10 @@ public class ProductoService {
             
             prod.setStock(prod.getStock()+cantidad);
         }
-        else if(accion.equals("decrementar")){
+        if(accion.equals("decrementar")){
             prod.setStock(prod.getStock()-cantidad);
         }
-        else{
-            
-        }
+        
         
         return this.productoRepository.save(prod);
                 
